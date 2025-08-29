@@ -16,9 +16,9 @@ function App() {
       
       
         <UserProfile 
-        name="Jonathan Ishimwe" 
+        name="Alice" 
         age="25" 
-        bio="Enjoys coding and exploring new cities" 
+        bio="Loves hiking and photography" 
       />
 
       <Footer />
