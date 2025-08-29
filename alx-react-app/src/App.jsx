@@ -14,7 +14,7 @@ function App() {
       
       <MainContent />
       
-
+      
         <UserProfile 
         name="Jonathan Ishimwe" 
         age="25" 
