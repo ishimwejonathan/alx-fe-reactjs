@@ -8,9 +8,9 @@ import UserProfile from './components/UserProfile';
 function App() {
   return (
     <div>
-      
-      <WelcomeMessage />
       <Header />
+      <WelcomeMessage />
+      
       
       <MainContent />
       
