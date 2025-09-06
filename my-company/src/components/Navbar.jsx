@@ -4,6 +4,7 @@ const navStyle = {
   display: 'flex',
   gap: '16px',
   alignItems: 'center',
+  justifyContent: 'center',   // ✅ Added
   padding: '12px 16px',
   backgroundColor: '#0d47a1',
 };
