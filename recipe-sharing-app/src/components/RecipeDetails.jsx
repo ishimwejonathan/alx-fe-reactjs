@@ -23,6 +23,9 @@ const RecipeDetails = () => {
       <h1>{recipe.title}</h1>
       <p>{recipe.description}</p>
 
+      {/* ✅ Show recipe.id */}
+      <small>ID: {recipe.id}</small>
+
       {/* Favorite toggle button */}
       {isFavorite ? (
         <button onClick={() => removeFavorite(recipeId)}>
