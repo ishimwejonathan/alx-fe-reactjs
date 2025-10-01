@@ -1,9 +1,11 @@
+import UserProfile from "./components/UserProfile";
+
 function App() {
   return (
-    <h1 className="text-3xl font-bold text-blue-600">
-      Hello, Tailwind + React + Vite!
-    </h1>
-  )
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <UserProfile />
+    </div>
+  );
 }
 
-export default App
+export default App;
