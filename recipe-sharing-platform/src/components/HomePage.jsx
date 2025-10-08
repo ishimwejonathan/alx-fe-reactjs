@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    // Load data from the local JSON file
     fetch("/src/data.json")
       .then((response) => response.json())
       .then((data) => setRecipes(data))
@@ -19,25 +19,21 @@ function HomePage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
         {recipes.map((recipe) => (
-          <div
-            key={recipe.id}
-            className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:scale-105"
-          >
-            <img
-              src={recipe.image}
-              alt={recipe.title}
-              className="w-full h-48 object-cover rounded-t-lg"
-            />
-            <div className="p-5">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {recipe.title}
-              </h2>
-              <p className="text-gray-600 text-sm">{recipe.summary}</p>
-              <button className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
-                View Recipe
-              </button>
+          <Link to={`/recipe/${recipe.id}`} key={recipe.id}>
+            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:scale-105">
+              <img
+                src={recipe.image}
+                alt={recipe.title}
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+              <div className="p-5">
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                  {recipe.title}
+                </h2>
+                <p className="text-gray-600 text-sm">{recipe.summary}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
