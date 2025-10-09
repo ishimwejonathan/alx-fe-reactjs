@@ -4,28 +4,38 @@ function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({}); // ✅ renamed from `error`
+
+  // ✅ create a validate() function
+  const validate = () => {
+    const newErrors = {};
+
+    if (!title.trim()) newErrors.title = "⚠️ Recipe title is required.";
+    if (!ingredients.trim()) newErrors.ingredients = "⚠️ Ingredients are required.";
+    if (!steps.trim()) newErrors.steps = "⚠️ Preparation steps are required.";
+
+    const ingredientsList = ingredients
+      .split("\n")
+      .filter((item) => item.trim() !== "");
+
+    if (ingredientsList.length < 2) {
+      newErrors.ingredients = "⚠️ Please include at least two ingredients.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // ✅ returns true if no errors
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation checks
-    if (!title || !ingredients || !steps) {
-      setError("⚠️ Please fill out all fields before submitting.");
-      return;
-    }
-
-    const ingredientsList = ingredients.split("\n").filter((item) => item.trim() !== "");
-    if (ingredientsList.length < 2) {
-      setError("⚠️ Please include at least two ingredients.");
-      return;
-    }
+    if (!validate()) return; // ✅ use the validate function
 
     // If validation passes
     const newRecipe = {
       id: Date.now(),
       title,
-      ingredients: ingredientsList,
+      ingredients: ingredients.split("\n").filter((item) => item.trim() !== ""),
       steps: steps.split("\n").filter((item) => item.trim() !== ""),
     };
 
@@ -36,7 +46,7 @@ function AddRecipeForm() {
     setTitle("");
     setIngredients("");
     setSteps("");
-    setError("");
+    setErrors({});
   };
 
   return (
@@ -49,10 +59,13 @@ function AddRecipeForm() {
           📝 Add New Recipe
         </h1>
 
-        {error && (
-          <p className="text-red-600 text-sm mb-4 text-center font-medium">
-            {error}
-          </p>
+        {/* ✅ Display general error messages */}
+        {Object.keys(errors).length > 0 && (
+          <div className="text-red-600 text-sm mb-4 text-center font-medium">
+            {Object.values(errors).map((err, index) => (
+              <p key={index}>{err}</p>
+            ))}
+          </div>
         )}
 
         {/* Title Input */}
