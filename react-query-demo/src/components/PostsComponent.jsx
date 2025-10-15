@@ -10,14 +10,17 @@ function PostsComponent() {
   const { data: posts, isLoading, isError, error, refetch, isFetching } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
-    staleTime: 1000 * 60,
+    staleTime: 1000 * 60, // 1 minute
+    cacheTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: true, // refetch on focus
+    keepPreviousData: true, // show old data while fetching
   });
 
   if (isLoading) return <p>Loading posts...</p>;
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="w-full max-w-3xl">
+    <div className="w-full max-w-3xl mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">Posts</h2>
         <button
@@ -27,7 +30,9 @@ function PostsComponent() {
           🔄 Refresh
         </button>
       </div>
+
       {isFetching && <p className="text-sm text-gray-500 mb-2">Refreshing...</p>}
+
       <ul className="space-y-4">
         {posts.slice(0, 10).map((post) => (
           <li key={post.id} className="p-4 bg-white rounded-lg shadow">
