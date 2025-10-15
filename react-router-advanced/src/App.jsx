@@ -11,7 +11,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/profile">Profile</Link>
-        <Link to="/post/1">Sample Post</Link>
+        <Link to="/blog/1">Sample Blog</Link> {/* ✅ Updated link */}
       </nav>
 
       <div className="p-6">
@@ -19,10 +19,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
 
-          {/* Dynamic route for blog posts */}
-          <Route path="/post/:postId" element={<BlogPost />} />
+          {/* ✅ Dynamic route corrected */}
+          <Route path="/blog/:id" element={<BlogPost />} />
 
-          {/* Protected route for Profile */}
+          {/* ✅ Protected nested route for Profile */}
           <Route path="/profile/*" element={<Profile />} />
         </Routes>
       </div>
